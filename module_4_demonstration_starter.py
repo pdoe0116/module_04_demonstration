@@ -37,7 +37,7 @@ except Exception as e:
 finally:
       if file is not None:
             file.close()
-            print("File Closed")
+            #print("File Closed")
             logging.error("File closed")
 
 
@@ -48,16 +48,16 @@ try:
       if len(data) ==0:
             raise Exception("No data exist.")
       else:
-            for record in data:
+        for record in data:
                   items = record.split(',')
                   title = items[0]
                   name = items[1]
                   salary = float(items[2])
                   #LECTURE SECTION 3
                   #REQUIREMENT:  NOTE RECORDS THAT EXCEED OR WILL EXCEED HIGH_SALARY AMOUNT
-                  salary *= (1 - RECOMMENDED_INCREASE)
-
+                  salary *= (1 + RECOMMENDED_INCREASE)
                   new_data.append([title,name,salary])
+                  
                   if salary > HIGH_SALARY:
                        logging.warning(f"{name}'s salary {salary} "
                                        + f"is currently above "
@@ -74,7 +74,6 @@ except Exception as e:
       logging.error(e)
 
 
-
 #LECTURE SECTION 4
 try:
       file = open('updated_salaries.txt', 'w')
@@ -82,10 +81,10 @@ try:
             row = ""
             for index, item in enumerate(record):
                   row += str(item)
-      if index < len(record) - 1:
-            row += (",")
-      row += '\n'
-      file.write(row)
+            if index < len(record) - 1:
+                  row += (",")
+            row += '\n'
+            file.write(row)
 except:
       #print("Exception writing data.")
       logging.error("Exception writing data.")
@@ -98,4 +97,4 @@ logging.debug("Debug level message.")
 logging.info("Info level message.")
 logging.warning("Warning level message.")
 logging.error("Error level message.")
-logging.critical("credical level message")
+logging.critical("credical level mgitessage")
